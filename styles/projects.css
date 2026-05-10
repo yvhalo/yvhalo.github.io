@@ -1,0 +1,45 @@
+.cmd-line {
+  margin-bottom: 1.5rem;
+}
+
+.page { max-width: 720px; width: 100%; }
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-entry {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 64px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.file-entry:hover {
+  background: rgba(196,168,255,0.05);
+  border-color: var(--purple);
+}
+
+.file-icon { font-size: 1.1rem; user-select: none; }
+
+.file-info { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.file-name { color: var(--yellow); font-weight: bold; }
+.file-desc { color: var(--dim); font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.file-badge {
+  font-size: 0.7rem;
+  color: var(--peach);
+  border: 1px solid rgba(255,203,168,0.35);
+  padding: 0.15rem 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}

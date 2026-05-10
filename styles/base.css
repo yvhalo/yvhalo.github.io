@@ -1,0 +1,54 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0e0c1a;
+  --surface: #16132a;
+  --text:    #ddd8f0;
+  --dim:     #6b6485;
+  --border:  rgba(180, 160, 230, 0.2);
+
+  --purple: #c4a8ff;
+  --blue:   #8ecfff;
+  --pink:   #ffb0d0;
+  --yellow: #ffe5a0;
+  --mint:   #a0f0c8;
+  --peach:  #ffcba8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px, transparent 3px,
+    rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+.cmd-line {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.prompt { color: var(--purple); user-select: none; }
+.cmd    { color: var(--blue); }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cursor {
+  display: inline-block;
+  color: var(--purple);
+  animation: blink 1s step-end infinite;
+}
