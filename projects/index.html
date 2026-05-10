@@ -9,34 +9,53 @@
   <link rel="stylesheet" href="../styles/projects.css" />
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <a class="back" href="../index.html">
-        <span class="prompt">$</span> <span class="cmd">cd ~</span>
-      </a>
-      <a class="header-identity" href="../index.html">
-        <span class="header-name">Yvette Hernández Alonso</span>
-        <span class="header-role">Android Developer</span>
-      </a>
-    </div>
-  </header>
+  <div class="phone-screen">
 
-  <div class="page">
-    <div class="cmd-line">
-      <span class="prompt">$</span>
-      <span class="cmd">ls ./projects/</span>
+    <div class="phone-status">
+      <span class="s-signal"><span class="sig-bar">▂</span><span class="sig-bar">▄</span><span class="sig-bar">▆</span> GPRS</span>
+      <span id="clock"></span>
+      <span class="s-battery" id="battery">···</span>
     </div>
 
-    <div class="file-list">
-      <a class="file-entry" href="cardsgame/index.html">
-        <span class="file-icon">🃏</span>
-        <div class="file-info">
-          <span class="file-name">cardsgame/</span>
-          <span class="file-desc">A web card game in the idea phase</span>
+    <div class="phone-title-bar">
+      <a href="../index.html">&#9664; back</a>
+      <span class="phone-title-label">PROJECTS</span>
+      <span>1 / 1</span>
+    </div>
+
+    <nav class="proj-menu">
+      <a class="proj-item" href="cardsgame/index.html">
+        <!-- playing card -->
+        <svg class="proj-icon" viewBox="0 0 8 8" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="0" y="0" width="8" height="1"/>
+          <rect x="0" y="0" width="1" height="8"/>
+          <rect x="7" y="0" width="1" height="8"/>
+          <rect x="0" y="7" width="8" height="1"/>
+          <rect x="2" y="2" width="1" height="1"/>
+          <rect x="5" y="5" width="1" height="1"/>
+        </svg>
+        <div class="proj-info">
+          <span class="proj-name">Cards Game</span>
+          <span class="proj-desc">A web card game in the idea phase</span>
         </div>
-        <span class="file-badge">[idea]</span>
+        <span class="proj-badge">idea</span>
+        <span class="proj-arrow">&#9658;</span>
       </a>
-    </div>
+    </nav>
+
+
   </div>
+  <script>
+    const c = document.getElementById('clock');
+    const tick = () => { const n = new Date(); c.textContent = String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0'); };
+    tick(); setInterval(tick, 1000);
+    const bat = document.getElementById('battery');
+    if (navigator.getBattery) {
+      navigator.getBattery().then(b => {
+        const upd = () => { bat.textContent = (b.charging ? '⚡' : '') + Math.round(b.level * 100) + '%'; };
+        upd(); b.onlevelchange = upd; b.onchargingchange = upd;
+      });
+    } else { bat.textContent = ''; }
+  </script>
 </body>
 </html>

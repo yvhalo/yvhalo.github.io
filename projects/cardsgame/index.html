@@ -9,46 +9,51 @@
   <link rel="stylesheet" href="../../styles/cardsgame.css" />
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <a class="back" href="../index.html">
-        <span class="prompt">$</span> <span class="cmd">cd ..</span>
-      </a>
-      <a class="header-identity" href="../../index.html">
-        <span class="header-name">Yvette Hernández Alonso</span>
-        <span class="header-role">Android Developer</span>
-      </a>
-    </div>
-  </header>
+  <div class="phone-screen">
 
-  <div class="page">
-    <div class="cmd-line">
-      <span class="prompt">$</span>
-      <span class="cmd">cat cardsgame/README.md</span>
+    <div class="phone-status">
+      <span class="s-signal"><span class="sig-bar">▂</span><span class="sig-bar">▄</span><span class="sig-bar">▆</span> GPRS</span>
+      <span id="clock"></span>
+      <span class="s-battery" id="battery">···</span>
     </div>
 
-    <div class="output">
+    <div class="phone-title-bar">
+      <a href="../index.html">&#9664; back</a>
+      <span class="phone-title-label">CARDS GAME</span>
+      <span></span>
+    </div>
+
+    <div class="screen-body">
       <div class="suits">
-        <span class="s-purple">♠</span>
-        <span class="s-pink">♥</span>
-        <span class="s-blue">♦</span>
-        <span class="s-mint">♣</span>
+        <span class="s-purple">&#9824;</span>
+        <span class="s-pink">&#9829;</span>
+        <span class="s-blue">&#9830;</span>
+        <span class="s-mint">&#9827;</span>
       </div>
 
       <p class="game-title">Cards Game</p>
 
-      <div class="status-line">
-        <span class="status-key">STATUS:</span>
-        <span class="status-val">COMING SOON</span>
+      <div class="game-row">
+        <span class="game-label">STATUS:</span>
+        <span class="game-value">COMING SOON</span>
       </div>
 
       <p class="game-desc">Something fun is being shuffled together.<br>Check back soon!</p>
     </div>
 
-    <div class="cmd-line" style="margin-top: 1.5rem;">
-      <span class="prompt">$</span>
-      <span class="cursor">█</span>
-    </div>
+
   </div>
+  <script>
+    const c = document.getElementById('clock');
+    const tick = () => { const n = new Date(); c.textContent = String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0'); };
+    tick(); setInterval(tick, 1000);
+    const bat = document.getElementById('battery');
+    if (navigator.getBattery) {
+      navigator.getBattery().then(b => {
+        const upd = () => { bat.textContent = (b.charging ? '⚡' : '') + Math.round(b.level * 100) + '%'; };
+        upd(); b.onlevelchange = upd; b.onchargingchange = upd;
+      });
+    } else { bat.textContent = ''; }
+  </script>
 </body>
 </html>
